@@ -1,20 +1,21 @@
 # Importamos a classe Flask do módulo flask para criar nossa aplicação web
 from flask import Flask, request , jsonify
-
+# CORS - Cross Origin Resource Sharing (Compartilhamento de recursos entre origens diferentes) Desabilita a política do Same Origin Policy
+from flask_cors import CORS
+# Importamos a biblioteca sqlite3, que permite criar e manipular um banco de dados local no formato SQLite
 import sqlite3
 
 # Criamos uma instância do Flask e armazenamos na variável "app"
 # O parâmetro _name_ indica que este arquivo será reconhecido como a aplicação principal
 app = Flask(__name__)
+CORS(app)
 
-# Criamos uma rota para o endpoint "/pague"
-# Quando acessarmos http://127.0.0.1:5000/pague, a função abaixo será executada
-
-
+# Criamos uma rota para o endpoint "/"
+# Quando acessarmos http://127.0.0.1:5000, a função abaixo será executada
 @app.route("/")
 def exiba_mensagem():
-    # Retorna um texto formatado em HTML que será exibido no navegador ao acessar a rota "/pague"
-    return "<h2>CRIANDO A API DO LIVROS VAI NA WEB</h2>"
+    # Retorna um texto formatado em HTML que será exibido no navegador ao acessar a rota "/"
+    return "<h1>💌 API DE LIVROS DOADOS 📚</h1>"
 
 def init_db():
     # sqlite3 crie o arquivo database.db e se conecte com a variável conn(connection)
