@@ -1,5 +1,5 @@
 # Importamos a classe Flask do módulo flask para criar nossa aplicação web
-from flask import Flask, request , jsonify
+from flask import Flask, request, jsonify, render_template
 # CORS - Cross Origin Resource Sharing (Compartilhamento de recursos entre origens diferentes) Desabilita a política do Same Origin Policy
 from flask_cors import CORS
 # Importamos a biblioteca sqlite3, que permite criar e manipular um banco de dados local no formato SQLite
@@ -12,10 +12,13 @@ CORS(app)
 
 # Criamos uma rota para o endpoint "/"
 # Quando acessarmos http://127.0.0.1:5000, a função abaixo será executada
+
+
 @app.route("/")
-def exiba_mensagem():
+def home():
     # Retorna um texto formatado em HTML que será exibido no navegador ao acessar a rota "/"
-    return "<h1>💌 API DE LIVROS DOADOS 📚</h1>"
+    return render_template('index.html')
+
 
 def init_db():
     # sqlite3 crie o arquivo database.db e se conecte com a variável conn(connection)
@@ -32,11 +35,14 @@ def init_db():
                      )
         """)
 
+
 init_db()
 
 # Quando apertarmos para enviar lá no form do site, precisamos ter um lugar para guardar. Esse lugar será a rota '/doar'
 # O método post serve para enviar os dados pelo lado do cliente.
-@app.route("/doar", methods = ['POST'])
+
+
+@app.route("/doar", methods=['POST'])
 def doar():
     # request é uma funcionalidade do flask própria para receber os dados do lado do cliente.
     # .get_json() é uma funcionalidade para receber os dados no formato json e guardar na variável dados
@@ -49,7 +55,7 @@ def doar():
     imagem_url = dados.get('imagem_url')
 
     if not titulo or not categoria or not autor or not imagem_url:
-        return jsonify({'erro':'Todos os campos são obrigatórios'}), 400
+        return jsonify({'erro': 'Todos os campos são obrigatórios'}), 400
 
     with sqlite3.connect('database.db') as conn:
         conn.execute(f'''
@@ -58,9 +64,11 @@ def doar():
 ''')
         conn.commit()
 
-        return jsonify({'mensagem':'Livro Cadastrado com Sucesso'}), 201
-    
+        return jsonify({'mensagem': 'Livro Cadastrado com Sucesso'}), 201
+
 # Rota para 'puxar' os livros - methods=[GET] método para puxar os dados
+
+
 @app.route('/livros', methods=['GET'])
 def listar_livros():
     with sqlite3.connect('database.db') as conn:
@@ -76,10 +84,11 @@ def listar_livros():
                 'autor': item[3],
                 'imagem_url': item[4]
             }
-        
+
             livros_formatados.append(dicionario_livros)
 
     return jsonify(livros_formatados)
+
 
 # Aqui verificamos se o script está sendo executado diretamente e não importado como módulo
 if __name__ == "__main__":

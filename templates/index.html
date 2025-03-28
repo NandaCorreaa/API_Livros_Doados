@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/svg+xml" href="../static/imgs/favicon.png" />   
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>API de Livros Doados</title>
+</head>
+<body>
+    <header>
+        <h1>💌 API DE LIVROS DOADOS 📚</h1>
+    </header>
+    <main>
+        <h2>Seja muito bem-vindo(a)</h2>
+        <p>Esta é a minha primeira API simples desenvolvida com <strong>Flask</strong> e <strong>SQLite</strong>.
+            A API permite o cadastro e a listagem de livros doados. Cada livro cadastrado contém as seguintes
+            informações:</p>
+        <section class="exemploJson">
+            <ul>
+                <li>🎥 Título</li>
+                <li>🎭 Categoria</li>
+                <li>🎬 Autor</li>
+                <li>📘 Imagem da capa do livro (URL)</li>
+            </ul>
+            <pre><code>
+ {
+    "id": 1,
+    "titulo": "O Pequeno Príncipe",
+    "categoria": "Filosofia/Fábula",
+    "autor": "Antoine de Saint-Exupéry",
+    "imagem_url": "https://cdn.awsli.com.br/2551/2551876/produto
+    /24218453612267cdc2d.jpg"
+ }
+                </code></pre>
+        </section>
+        <h2>Endpoints de Livros Doados:</h2>
+        <section class="caixaEndpoints ">
+            <p>Para retornar todos os livros doados cadastrados pasta acessar o endpoint: <a class="endpoint" target="_blank"
+                    href="https://api-livros-doados.onrender.com/livros">/livros</a>
+            <p>
+            <p>Para cadastro das informações do livro doado: <a class="endpoint" target="_blank"
+                    href="https://api-livros-doados.onrender.com/doar">/doar</a>
+            <p>
+        </section>
+    </main>
+    <footer>
+        <p class="copyright">Desenvolvido por Fernanda Correa - 2025</p>
+        <address>
+            <a target="_blank" href="https://github.com/NandaCorreaa"><img class="redes_img"
+                    src="../static/imgs/github.png" alt="Logo branca do GitHub"></a>
+            <a target="_blank" href="https://www.linkedin.com/in/fernanda-corr%C3%AAa-477926275/"><img class="redes_img"
+                    src="../static/imgs/linkedin.png" alt="Logo branca do LinkedIn"></a>
+            <a target="_blank" href="https://www.instagram.com/__nandacorrea/"><img class="redes_img"
+                    src="../static/imgs/instagram.png" alt="Logo branca da Instagram"></a>
+        </address>
+    </footer>
+</body>
+</html>
